@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group,User
-from .models import Profile
+from .models import Profile,Bubbas
 admin.site.unregister(Group)
 admin.site.unregister(User)
 
@@ -14,3 +14,4 @@ class UserAdmin(admin.ModelAdmin):
     inlines=[ProfileInLine]
 
 admin.site.register(User,UserAdmin)
+admin.site.register(Bubbas)
