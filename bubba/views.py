@@ -59,3 +59,8 @@ def LoginView(request):
         
     context={}
     return render(request,'bubba/login.html',context)
+
+def LogoutView(request):
+    logout(request)
+    messages.info(request,"you have successfully logged out.")
+    return redirect('/')
