@@ -11,6 +11,20 @@
 <body>
     <section class="hero is-small is-success mb-4">
         <div class="hero-body">
+            <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+               
+              
+                <a class="navbar-item">
+                      
+                    <span aria-hidden="true"><a href="/">Home</a></span>
+                </a>
+                <a class="navbar-item">
+                    <span aria-hidden="true"><a href="{% url 'profile_list' %}">Bubba Members</a></span>
+            </a>   
+                    
+                  
+                </div>
+            </nav>
             <h1 class="title is-1">Bubba</h1>
             <p class="subtitle is-4">
                 Your tiny social network built with Django

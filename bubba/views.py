@@ -1,9 +1,20 @@
-from django.shortcuts import render
-from .models import Profile
+from types import BuiltinMethodType
+from django.shortcuts import render,redirect
+from .models import *
+from .forms import BubbasForm
 
 def dashboard(request):
-
-    return render(request,"bubba/dashboard.html")
+    if request.method=='POST':
+        form=BubbasForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.user=request.user
+            form.save()
+            return redirect('/')
+    form=BubbasForm
+    form_model=Bubbas.objects.all
+    context={"form":form,"form_model":form_model
+    }
+    return render(request,"bubba/dashboard.html",context)
 
 def profile_list(request):
     profiles=Profile.objects.exclude(user=request.user)
