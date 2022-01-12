@@ -5,6 +5,8 @@ from .forms import BubbasForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
 
 def dashboard(request):
     if request.method=='POST':
@@ -42,3 +44,18 @@ class SignupView(generic.CreateView):
     form_class=UserCreationForm
     success_url=reverse_lazy('dashboard')
     template_name='bubba/signup.html'
+
+def LoginView(request):
+    if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('/')
+        else:
+            messages.info(request,"Username OR Password is incorrect")
+        
+    context={}
+    return render(request,'bubba/login.html',context)
