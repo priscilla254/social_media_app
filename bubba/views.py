@@ -1,7 +1,10 @@
-from types import BuiltinMethodType
+
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import BubbasForm
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 
 def dashboard(request):
     if request.method=='POST':
@@ -35,3 +38,7 @@ def profile(request,pk):
     context={'profile':profile}
     return render(request,"bubba/profile.html",context)
 
+class SignupView(generic.CreateView):
+    form_class=UserCreationForm
+    success_url=reverse_lazy('dashboard')
+    template_name='bubba/signup.html'
